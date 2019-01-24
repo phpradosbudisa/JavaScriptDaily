@@ -8,6 +8,14 @@
 </head>
 <style>
 
+    body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
+
     .clock{
         height: 400px;
         width: 400px;
@@ -37,22 +45,43 @@
     }
 
     .second-hand{
-        background: yellow;
-    }
-
-    .min-hand{
         background: red;
     }
 
+    .min-hand{
+        background: darkblue;
+    }
+
+    .digital{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 2em;
+        color: black;
+        text-transform: uppercase;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .digital span{
+        font-size: 3rem;
+    }
 </style>
 <body>
     
-<div class="clock">
-    <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-    </div>
+<div class="elemnt">
+        <div class="clock">
+                <div class="clock-face">
+                    <div class="hand hour-hand"></div>
+                    <div class="hand min-hand"></div>
+                    <div class="hand second-hand"></div>
+                </div>
+            </div>
+</div>
+<div class="digital">
+    <span id="date"></span>
+    <span id="h">Hour: </span>
+    <span id="m">Minute: </span>
+    <span id="s">Second: </span>
 </div>
 
 </body>
@@ -78,8 +107,13 @@
         const hoursDegrees = (hours / 12 ) * 360 + 90;
         hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
 
+        const year = now.getFullYear();
         console.log("Hour: " + hours +  " Minute: " + minutes+ " Second: " + seconds);
-
+        
+        const h = document.querySelector('#h').innerHTML = "Hour: " + hours + "  ";
+        const m = document.querySelector('#m').innerHTML = "Minute: " + minutes + "  ";
+        const s = document.querySelector('#s').innerHTML = "Seconds: " + seconds + "  ";
+        const date = document.querySelector('#date').innerHTML = "We are currently in: " + year + "  ";
     }
 
     setInterval(setDate, 1000);
