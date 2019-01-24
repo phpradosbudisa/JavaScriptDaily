@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Clock</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+
+    .clock{
+        height: 400px;
+        width: 400px;
+        border: 5px solid black;
+        border-radius: 100%;
+    }
+
+    .clock-face{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-3px);
+        padding: 0 5px;
+    }
+
+    .hand{
+        width: 45%;
+        height: 6px;
+        position: absolute;
+        top: 50%;
+        background: black;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.5s;
+        transition-timing-function: cubic-bezier(0,3.31,1,1);
+        border-radius: 28px;
+    }
+
+    .second-hand{
+        background: yellow;
+    }
+
+    .min-hand{
+        background: red;
+    }
+
+</style>
+<body>
+    
+<div class="clock">
+    <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+    </div>
+</div>
+
+</body>
+
+<script>
+
+    const secondHand = document.querySelector('.second-hand');
+    const minHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+
+    function setDate(){
+        const now = new Date();
+
+        const seconds = now.getSeconds();
+        const secondsDegrees = (seconds / 60) * 360 + 90;
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+
+        const minutes = now.getMinutes();
+        const minutesDegrees = (minutes / 60) * 360 + 90;
+        minHand.style.transform = `rotate(${minutesDegrees}deg)`;
+        
+        const hours = now.getHours();
+        const hoursDegrees = (hours / 12 ) * 360 + 90;
+        hourHand.style.transform = `rotate(${hoursDegrees}deg)`;
+
+        console.log("Hour: " + hours +  " Minute: " + minutes+ " Second: " + seconds);
+
+    }
+
+    setInterval(setDate, 1000);
+
+</script>
+
+</html>
